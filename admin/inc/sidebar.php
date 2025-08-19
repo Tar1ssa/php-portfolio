@@ -28,6 +28,16 @@
                             <span>About</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="?page=trailers">
+                            <i class="bi bi-circle"></i><span>Trailers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?page=job">
+                            <i class="bi bi-circle"></i><span>Job</span>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="?page=client">
                             <i class="bi bi-gear"></i>

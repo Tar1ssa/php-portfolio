@@ -16,8 +16,7 @@ if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $delete = mysqli_query(
         $koneksi,
-        "DELETE FROM slider WHERE id='$id'"
-    );
+        "DELETE FROM skills WHERE id='$id'");
     if ($delete) {
         header("location:?page=tambah-about&hapus=berhasil");
     }
@@ -81,7 +80,7 @@ if (isset($_POST['simpan'])) {
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
-                            <a href="?page=tambah-about" class="text-muted">Kembali</a>
+                            <a href="javascript:history.back()" class="text-muted">Kembali</a>
                         </div>
                     </form>
                 </div>

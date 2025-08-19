@@ -5,27 +5,27 @@ $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
-    $query = mysqli_query($koneksi, "SELECT * FROM slider WHERE id = '$id'");
+    $query = mysqli_query($koneksi, "SELECT * FROM trailers WHERE id = '$id'");
     $rowedit = mysqli_fetch_assoc($query);
-    $judul = "Edit slider";
+    $judul = "Edit trailers";
 } else {
-    $judul = "Tambah slider";
+    $judul = "Tambah trailers";
 }
 
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $image_query = mysqli_query($koneksi, "SELECT id, image FROM slider Where id='$id'");
+    $image_query = mysqli_query($koneksi, "SELECT id, image FROM trailers Where id='$id'");
 
     $image_row = mysqli_fetch_assoc($image_query);
     $image_name = $image_row['image'];
-    unlink("uploads/slider" . $image_name);
+    unlink("uploads/trailers" . $image_name);
     $delete = mysqli_query(
         $koneksi,
-        "DELETE FROM slider WHERE id='$id'"
+        "DELETE FROM trailers WHERE id='$id'"
     );
     if ($delete) {
-        header("location:?page=slider&hapus=berhasil");
+        header("location:?page=trailers&hapus=berhasil");
     }
 }
 
@@ -33,7 +33,9 @@ if (isset($_GET['delete'])) {
 // saat tombol simpan ditekan
 if (isset($_POST['simpan'])) {
     $title = $_POST['title'];
-    $description = $_POST['description'];
+    $caption = $_POST['caption'];
+    $url = $_POST['url'];
+    $status = $_POST['status'];
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         $tmp_name = $_FILES['image']['tmp_name'];
@@ -42,7 +44,7 @@ if (isset($_POST['simpan'])) {
         $ext_allow = ['image/png', 'image/jpg', 'image/jpeg'];
         if (in_array($type, $ext_allow)) {
             // echo 'image can be uploaded';
-            $path = "uploads/slider";
+            $path = "uploads/trailers/";
             if (!is_dir($path)) {
                 mkdir($path);
             }
@@ -59,26 +61,26 @@ if (isset($_POST['simpan'])) {
             die;
         }
 
-        $update_gambar = "UPDATE slider SET title='$title', description='$description', image='$image_name' WHERE id='$id'";
+        $update_gambar = "UPDATE trailers SET title='$title', caption='$caption', image='$image_name', url='$url', status='$status' WHERE id='$id'";
         // mengedit dengan mengubah gambar
     } else {
-        $update_gambar = "UPDATE slider SET title='$title', description='$description' WHERE id='$id'";
+        $update_gambar = "UPDATE trailers SET title='$title', caption='$caption', url='$url', status='$status' WHERE id='$id'";
         // mengedit tanpa mengubah gambar
     }
 
     if ($id) {
         $update = mysqli_query($koneksi, "$update_gambar");
         if ($update) {
-            header("location:?page=slider&ubah=berhasil");
+            header("location:?page=trailers&ubah=berhasil");
         }
     } else {
-        $insert = mysqli_query($koneksi, "INSERT INTO slider (title, description, image) VALUES('$title', '$description', '$image_name')");
+        $insert = mysqli_query($koneksi, "INSERT INTO trailers (title, caption, image, url, status) VALUES('$title', '$caption', '$image_name', '$url', '$status')");
         if ($insert) {
-            header("location:?page=slider&tambah=berhasil");
+            header("location:?page=trailers&tambah=berhasil");
         }
     }
 }
-// $query = mysqli_query($koneksi, "SELECT * FROM slider ORDER BY id DESC");
+// $query = mysqli_query($koneksi, "SELECT * FROM trailers ORDER BY id DESC");
 // $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
 
@@ -92,7 +94,7 @@ if (isset($_POST['simpan'])) {
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="?page=home">Home</a></li>
             <li class="breadcrumb-item">Pages</li>
-            <li class="breadcrumb-item">slider</li>
+            <li class="breadcrumb-item">trailers</li>
             <li class="breadcrumb-item active"><?php echo $judul; ?></li>
         </ol>
     </nav>
@@ -108,7 +110,7 @@ if (isset($_POST['simpan'])) {
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label" for="">Image</label>
-                            <img width="100" src="uploads/slider<?php echo ($id) ? $rowedit['image'] : '' ?>" alt="">
+                            <img width="100" src="uploads/trailers<?php echo ($id) ? $rowedit['image'] : '' ?>" alt="">
                             <input type="file" name="image" id="" class="form-control" placeholder="Masukkan nama anda"
                                 value="<?php echo ($id) ? $rowedit['image'] : '' ?>">
 
@@ -117,20 +119,35 @@ if (isset($_POST['simpan'])) {
                         <div class="mb-3">
                             <label class="form-label" for="">Title</label>
                             <input type="text" name="title" id="" class="form-control"
-                                placeholder="Masukkan judul slider"
+                                placeholder="Masukkan judul trailers"
                                 value="<?php echo ($id) ? $rowedit['title'] : '' ?>">
                             <img src="" alt="">
 
                         </div>
                         <div class="mb-3">
-                            <label class="form-label" for="">Description</label>
-                            <textarea name="description" id=""
-                                class="form-control"><?php echo ($id) ? $rowedit['description'] : '' ?></textarea>
+                            <label class="form-label" for="">caption</label>
+                            <textarea name="caption" id=""
+                                class="form-control"><?php echo ($id) ? $rowedit['caption'] : '' ?></textarea>
 
                         </div>
                         <div class="mb-3">
+                            <label class="form-label" for="">Video URL</label>
+                            <input type="url" name="url" value="<?php echo ($id) ? $rowedit['url'] : '' ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="">Status</label>
+                            <select name="status" id="">
+                                <option <?php echo ($id) ? $rowedit['status'] == 1 ? 'selected' : ''  : '' ?> value="1">
+                                    Active
+                                </option>
+                                <option <?php echo ($id) ? $rowedit['status'] == 0 ? 'selected' : ''  : '' ?> value="0">
+                                    Inactive
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <button type="submit" class="btn btn-success" name="simpan">Simpan</button>
-                            <a href="?page=slider" class="text-muted">Kembali</a>
+                            <a href="?page=trailers" class="text-muted">Kembali</a>
                         </div>
                     </form>
                 </div>

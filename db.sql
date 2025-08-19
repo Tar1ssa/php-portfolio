@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2025 at 12:20 AM
+-- Generation Time: Aug 19, 2025 at 06:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -36,6 +36,13 @@ CREATE TABLE `about` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `about`
+--
+
+INSERT INTO `about` (`id`, `title`, `content`, `image`, `created_at`, `updated_at`, `status`) VALUES
+(8, 'Web Designer', 'As a fresh graduate in Informatics Technology and Computer Education at University of Negeri Jakarta, I pursue reliability, diligence, and responsibility.', '', '2025-08-19 12:16:33', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -135,6 +142,13 @@ CREATE TABLE `experience` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `experience`
+--
+
+INSERT INTO `experience` (`id`, `how_long`, `time`, `created_at`, `updated_at`) VALUES
+(1, '2', 'Years', '2025-08-19 13:47:00', '2025-08-19 14:48:02');
+
 -- --------------------------------------------------------
 
 --
@@ -155,6 +169,29 @@ CREATE TABLE `hero` (
 
 INSERT INTO `hero` (`id`, `caption`, `image`, `created_at`, `updated_at`) VALUES
 (1, 'Crafting digital experiences with precision, passion, and purpose.', '1755531469-5s5HSFk.png', '2025-08-18 15:05:12', '2025-08-18 15:37:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `job`
+--
+
+CREATE TABLE `job` (
+  `id` int(11) NOT NULL,
+  `company` text NOT NULL,
+  `job_title` text NOT NULL,
+  `description` longtext NOT NULL,
+  `cv` varchar(150) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `job`
+--
+
+INSERT INTO `job` (`id`, `company`, `job_title`, `description`, `cv`, `created_at`, `updated_at`) VALUES
+(1, '', '', '', '1755620617-Umar-Aziz-CV.pdf', '2025-08-19 16:23:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -229,6 +266,16 @@ CREATE TABLE `skills` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `skill`, `proficient`, `created_at`, `updated_at`) VALUES
+(2, 'PHP', 80, '2025-08-19 12:11:28', NULL),
+(3, 'Javascript', 0, '2025-08-19 12:11:43', '2025-08-19 15:01:42'),
+(4, 'Figma', 80, '2025-08-19 12:11:58', NULL),
+(5, 'HTML', 100, '2025-08-19 12:16:07', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -252,6 +299,30 @@ INSERT INTO `slider` (`id`, `title`, `description`, `image`, `created_at`, `upda
 (10, 'Title goes here', 'description goes here', '1755527577-wallhaven-ox19m9.jpg', '2025-08-13 01:25:43', '2025-08-18 14:32:57'),
 (11, 'Title goes here', 'description goes here', '1755527586-wallhaven-r2g7rm.jpg', '2025-08-13 01:25:49', '2025-08-18 14:33:06'),
 (12, 'Title goes here', 'description goes here', '1755527594-wallhaven-vgr5op.jpg', '2025-08-13 01:25:57', '2025-08-18 14:33:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trailers`
+--
+
+CREATE TABLE `trailers` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `caption` text NOT NULL,
+  `url` varchar(150) NOT NULL,
+  `image` varchar(150) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `trailers`
+--
+
+INSERT INTO `trailers` (`id`, `title`, `caption`, `url`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Here goes my video', 'This would be where i introduce myself', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '1755618214-it-was-me-dio.jpg', 1, '2025-08-19 15:31:27', '2025-08-19 15:43:34');
 
 -- --------------------------------------------------------
 
@@ -318,6 +389,12 @@ ALTER TABLE `hero`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `job`
+--
+ALTER TABLE `job`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `portofolio`
 --
 ALTER TABLE `portofolio`
@@ -342,6 +419,12 @@ ALTER TABLE `slider`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `trailers`
+--
+ALTER TABLE `trailers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -355,7 +438,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `blog`
@@ -379,12 +462,18 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT for table `experience`
 --
 ALTER TABLE `experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hero`
 --
 ALTER TABLE `hero`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `job`
+--
+ALTER TABLE `job`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -403,13 +492,19 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `trailers`
+--
+ALTER TABLE `trailers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

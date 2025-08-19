@@ -2,7 +2,7 @@
 $_HOST = "localhost";
 $_USERNAME = "root";
 $_PASSWORD = "";
-$_DATABASE = "db_php_portofolio_angkatan3";
+$_DATABASE = "db";
 
 $koneksi = mysqli_connect(
     $_HOST,

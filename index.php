@@ -6,6 +6,18 @@ $rowsetting = mysqli_fetch_assoc($querysetting);
 $queryhero = mysqli_query($koneksi, "SELECT * FROM hero LIMIT 1");
 $rowhero = mysqli_fetch_assoc($queryhero);
 
+$queryabout = mysqli_query($koneksi, "SELECT * FROM about WHERE status= 1 ORDER BY id DESC");
+$rowabout = mysqli_fetch_assoc($queryabout);
+
+$queryexp = mysqli_query($koneksi, "SELECT * FROM experience WHERE id=1");
+$rowexp = mysqli_fetch_assoc($queryexp);
+
+$querytrailers = mysqli_query($koneksi, "SELECT * FROM trailers WHERE status = 1");
+$rowtrailers = mysqli_fetch_assoc($querytrailers);
+
+$queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
+$rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
+
 ?>
 
 <!doctype html>

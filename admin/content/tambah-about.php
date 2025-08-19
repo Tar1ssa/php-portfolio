@@ -6,10 +6,18 @@ $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 $queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
 $rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
 
+$totalskills =  mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM skills");
+$rowtotalskills = mysqli_fetch_assoc($totalskills);
+
+$queryexp = mysqli_query($koneksi, "SELECT * FROM experience ORDER BY id DESC LIMIT 1");
+$rowexp = mysqli_fetch_all($queryexp, MYSQLI_ASSOC);
+
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
     $query = mysqli_query($koneksi, "SELECT * FROM about WHERE id = '$id'");
     $rowedit = mysqli_fetch_assoc($query);
+    $queryeditexp = mysqli_query($koneksi, "SELECT * FROM experience WHERE id = '$id'");
+    $roweditexp = mysqli_fetch_assoc($queryeditexp);
     $judul = "Edit about";
 } else {
     $judul = "Add about";
@@ -75,11 +83,13 @@ if (isset($_POST['simpan'])) {
 
     if ($id) {
         $update = mysqli_query($koneksi, "$update_gambar");
+        $updateexp = mysqli_query($koneksi, "UPDATE experience SET how_long='$how_long', time='$time'");
         if ($update) {
             header("location:?page=about&ubah=berhasil");
         }
     } else {
         $insert = mysqli_query($koneksi, "INSERT INTO about (title, content, image, status) VALUES('$title', '$content', '$image_name', '$status')");
+        $insertexp = mysqli_query($koneksi, "INSERT INTO experience (how_long, time) VALUES ('$how_long', '$time')");
         if ($insert) {
             header("location:?page=about&tambah=berhasil");
         }
@@ -125,17 +135,25 @@ if (isset($_POST['simpan'])) {
                                 class="form-control"><?php echo ($id) ? $rowedit['content'] : '' ?></textarea>
 
                         </div>
-                        <div class="mb-3">
-                            <label for="">Experience</label>
-                            <input type="text" name="how_long" id="" class="form-control" placeholder="ex:7"
-                                value="<?php echo ($id) ? $rowedit['how_long'] : '' ?>">
-                            <small>Input how long is your experience</small>
-                            <input type="text" name="time" id="" class="form-control" placeholder="ex:Years/Month/Days"
-                                value="<?php echo ($id) ? $rowedit['time'] : '' ?>">
-                            <small>Input the time</small>
-                        </div>
+                        <hr>
+                        <?php
+                        
+
+                                include 'experience.php';
+            
+                            
+                            
+                        ?>
+                        <hr>
                         <label for="">Skills</label>
-                        <a href="?page=tambah-skills" class="btn btn-sm btn-primary" align="right">Tambah Skills</a>
+                        <?php
+                            if ($rowtotalskills['total'] == 4) {
+                                echo " is full";
+                            } else {
+                                echo "<a href='?page=tambah-skills' class='btn btn-sm btn-primary' align='right'>Tambah Skills</a>";
+                            }
+                        ?>
+                        
                         <table class="table table-bordered mt-3">
                             <thead>
                                 <tr>
