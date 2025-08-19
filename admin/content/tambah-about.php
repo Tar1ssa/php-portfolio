@@ -3,6 +3,9 @@ $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 
 
 
+$queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
+$rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
+
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
     $query = mysqli_query($koneksi, "SELECT * FROM about WHERE id = '$id'");
@@ -118,19 +121,61 @@ if (isset($_POST['simpan'])) {
                         </div>
                         <div class="mb-3">
                             <label for="">Content</label>
-                            <textarea name="content" 
+                            <textarea name="content"
                                 class="form-control"><?php echo ($id) ? $rowedit['content'] : '' ?></textarea>
 
                         </div>
                         <div class="mb-3">
                             <label for="">Experience</label>
-                            <input type="text" name="how_long" id="" class="form-control"
-                                placeholder="ex:7" value="<?php echo ($id) ? $rowedit['how_long'] : '' ?>">
-                                <small>Input how long is your experience</small>
-                            <input type="text" name="time" id="" class="form-control"
-                                placeholder="ex:Years/Month/Days" value="<?php echo ($id) ? $rowedit['time'] : '' ?>">
-                                <small>Input the time</small>
+                            <input type="text" name="how_long" id="" class="form-control" placeholder="ex:7"
+                                value="<?php echo ($id) ? $rowedit['how_long'] : '' ?>">
+                            <small>Input how long is your experience</small>
+                            <input type="text" name="time" id="" class="form-control" placeholder="ex:Years/Month/Days"
+                                value="<?php echo ($id) ? $rowedit['time'] : '' ?>">
+                            <small>Input the time</small>
                         </div>
+                        <label for="">Skills</label>
+                        <a href="?page=tambah-skills" class="btn btn-sm btn-primary" align="right">Tambah Skills</a>
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Skill</th>
+                                    <th>Proficiency</th>
+                                    <th>
+
+
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($rowskills as $keyskills => $rowskill):
+                                ?>
+                                    <tr>
+                                        <td><?php echo $keyskills += 1 ?></td>
+                                        <td><?php echo $rowskill['skill'] ?></td>
+                                        <td><input class="form-range" type="range" min="0" max="100"
+                                                value="<?php echo $rowskill['proficient'] ?>" readonly
+                                                disabled><?php echo $rowskill['proficient'] ?>%</td>
+                                        <td>
+                                            <a href="?page=tambah-skills&edit=<?php echo $rowskill['id'] ?>"
+                                                class="btn btn-sm btn-success">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-skills&delete=<?php echo $rowskill['id'] ?>"
+                                                class="btn btn-sm btn-danger">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+
                         <div class="mb-3">
                             <label for="">Status</label>
                             <select name="status" id="">

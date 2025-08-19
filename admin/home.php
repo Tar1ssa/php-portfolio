@@ -90,6 +90,7 @@ if (empty($_SESSION['ID_USER'])) {
         let input = document.querySelector('#tags');
         new Tagify(input)
     </script>
+
 </body>
 
 </html>
