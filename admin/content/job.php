@@ -1,6 +1,46 @@
 <?php
 $query = mysqli_query($koneksi, "SELECT * FROM job ORDER BY id ASC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+$querycv = mysqli_query($koneksi, "SELECT cv, id FROM job LIMIT 1");
+$rowcv = mysqli_fetch_assoc($querycv);
+// var_dump($rowcv);
+// die;
+
+if (isset($_POST['editcv'])) {
+    $id = $rowcv['id'];
+    if (!empty($_FILES['application']['name'])) {
+        $application = $_FILES['application']['name'];
+        $tmp_name = $_FILES['application']['tmp_name'];
+        $type = $_FILES['application']['type'];
+        $ext_allow = ['application/pdf'];
+        if (in_array($type, $ext_allow)) {
+            // echo 'application can be uploaded';
+            $path = "uploads/job/";
+            if (!is_dir($path)) {
+                mkdir($path);
+            }
+            $application_name = time() . "-" . basename($application);
+            $target_files = $path . $application_name;
+            if (move_uploaded_file($_FILES['application']['tmp_name'], $target_files)) {
+                //jika gambar ada, maka gambar sebelumnya akan diganti dengan gambar baru
+                if (!empty($row['application'])) {
+                    unlink($path . $row['application']);
+                }
+            }
+        } else {
+            echo 'application extension cant be uploaded';
+            die;
+        }
+
+        $update_cv = mysqli_query($koneksi, "UPDATE job SET cv='$application_name' WHERE id='$id'");
+        // mengedit dengan mengubah gambar
+        if ($update_cv) {
+            header("location:?page=job&editcv=berhasil");
+        }
+    }
+}
+
 ?>
 
 <div class="pagetitle">
@@ -28,10 +68,10 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>CV</th>
                                 <th>Company Name</th>
                                 <th>Job Title</th>
                                 <th>Description</th>
+                                <th>Duration</th>
                                 <th></th>
 
                             </tr>
@@ -42,11 +82,10 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                             ?>
                                 <tr>
                                     <td><?php echo $key += 1 ?></td>
-                                    <td><img width="100" src="uploads/job<?php echo ($row['cv']) ?>" alt="">
-                                    </td>
                                     <td><?php echo $row['company'] ?></td>
                                     <td><?php echo $row['job_title'] ?></td>
                                     <td><?php echo $row['description'] ?></td>
+                                    <td><?php echo $row['start'] ?> - <?php echo $row['ended'] ?></td>
                                     <td>
                                         <a href="?page=tambah-job&edit=<?php echo $row['id'] ?>"
                                             class="btn btn-sm btn-success">
@@ -62,6 +101,20 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                             <?php endforeach ?>
                         </tbody>
                     </table>
+
+                    <embed src="uploads/job/<?php echo $rowcv['cv'] ?>" type="application/pdf" width="100%"
+                        height="600px" />
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="">CV</label>
+
+                            <input type="file" name="application" id="" class="form-control" accept="application/pdf"
+                                value="uploads/job/<?php echo $rowcv['cv'] ?>">
+
+                            <small class="text-danger">*file must be pdf</small>
+                        </div>
+                        <button class="btn btn-sm btn-success" type="submit" name="editcv">Edit CV</button>
+                    </form>
                 </div>
             </div>
 

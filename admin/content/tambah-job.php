@@ -34,48 +34,17 @@ if (isset($_GET['delete'])) {
 if (isset($_POST['simpan'])) {
     $company = $_POST['company'];
     $description = $_POST['description'];
-    $job =$_POST['job'];
-    if (!empty($_FILES['application']['name'])) {
-        $application = $_FILES['application']['name'];
-        $tmp_name = $_FILES['application']['tmp_name'];
-        $type = $_FILES['application']['type'];
-    
-
-
-        $ext_allow = ['application/pdf'];
-        if (in_array($type, $ext_allow)) {
-            // echo 'application can be uploaded';
-            $path = "uploads/job/";
-            if (!is_dir($path)) {
-                mkdir($path);
-            }
-            $application_name = time() . "-" . basename($application);
-            $target_files = $path . $application_name;
-            if (move_uploaded_file($_FILES['application']['tmp_name'], $target_files)) {
-                //jika gambar ada, maka gambar sebelumnya akan diganti dengan gambar baru
-                if (!empty($row['application'])) {
-                    unlink($path . $row['application']);
-                }
-            }
-        } else {
-            echo 'application extension cant be uploaded';
-            die;
-        }
-
-        $update_gambar = "UPDATE job SET company='$company', description='$description', cv='$application_name', job_title='$job' WHERE id='$id'";
-        // mengedit dengan mengubah gambar
-    } else {
-        $update_gambar = "UPDATE job SET company='$company', description='$description', job_title='$job' WHERE id='$id'";
-        // mengedit tanpa mengubah gambar
-    }
+    $job = $_POST['job'];
+    $start = $_POST['start'];
+    $ended = $_POST['ended'];
 
     if ($id) {
-        $update = mysqli_query($koneksi, "$update_gambar");
+        $update = mysqli_query($koneksi, "UPDATE job SET company='$company', description='$description', job_title='$job', start='$start', ended='$ended' WHERE id='$id'");
         if ($update) {
             header("location:?page=job&ubah=berhasil");
         }
     } else {
-        $insert = mysqli_query($koneksi, "INSERT INTO job (company, description, cv, job_title) VALUES('$company', '$description', '$application_name', '$job')");
+        $insert = mysqli_query($koneksi, "INSERT INTO job (company, description, job_title, start, ended) VALUES('$company', '$description', '$job', '$start', '$ended')");
         if ($insert) {
             header("location:?page=job&tambah=berhasil");
         }
@@ -110,29 +79,35 @@ if (isset($_POST['simpan'])) {
                     <h5 class="card-title"><?php echo $judul; ?></h5>
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label class="form-label" for="">CV</label>
-                            
-                            <input type="file" name="application" id="" class="form-control" accept="application/pdf"
-                                value="<?php echo ($id) ? $rowedit['cv'] : '' ?>">
-
-                            <small class="text-danger">*application must be landscape, or size 1920 x 1088px</small>
-                        </div>
-                        <div class="mb-3">
                             <label class="form-label" for="">Company</label>
                             <input type="text" name="company" id="" class="form-control"
-                                placeholder="Masukkan judul job"
-                                value="<?php echo ($id) ? $rowedit['company'] : '' ?>">
+                                placeholder="Masukkan judul job" value="<?php echo ($id) ? $rowedit['company'] : '' ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="">Job Title</label>
-                            <input type="text" name="job" id="" class="form-control"
-                                placeholder="Masukkan judul job"
+                            <input type="text" name="job" id="" class="form-control" placeholder="Masukkan judul job"
                                 value="<?php echo ($id) ? $rowedit['job_title'] : '' ?>">
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="">Description</label>
                             <textarea name="description" id=""
                                 class="form-control"><?php echo ($id) ? $rowedit['description'] : '' ?></textarea>
+
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="">Duration</label>
+                            <br>
+                            <small class="text-muted">Tahun mulai</small>
+                            <input type="number" name="start" id="" class="form-control"
+                                placeholder="Masukkan tahun mulai" value="<?php echo $rowedit['start']  ?>" min="1900"
+                                max="2100" step="1">
+                            <br>
+                            <small class="text-muted">Tahun selesai</small>
+                            <input type="number" name="ended" id="" class="form-control"
+                                placeholder="Masukkan tahun selesai" value="<?php echo $rowedit['ended'] ?>" min="1900"
+                                max="2100" step="1">
+
+
 
                         </div>
                         <div class="mb-3">

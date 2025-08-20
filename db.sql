@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2025 at 06:24 PM
+-- Generation Time: Aug 20, 2025 at 10:13 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db`
+-- Database: `php_portfolio_3`
 --
 
 -- --------------------------------------------------------
@@ -181,6 +181,8 @@ CREATE TABLE `job` (
   `company` text NOT NULL,
   `job_title` text NOT NULL,
   `description` longtext NOT NULL,
+  `start` varchar(4) NOT NULL,
+  `ended` varchar(4) NOT NULL,
   `cv` varchar(150) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
@@ -190,8 +192,11 @@ CREATE TABLE `job` (
 -- Dumping data for table `job`
 --
 
-INSERT INTO `job` (`id`, `company`, `job_title`, `description`, `cv`, `created_at`, `updated_at`) VALUES
-(1, '', '', '', '1755620617-Umar-Aziz-CV.pdf', '2025-08-19 16:23:37', NULL);
+INSERT INTO `job` (`id`, `company`, `job_title`, `description`, `start`, `ended`, `cv`, `created_at`, `updated_at`) VALUES
+(1, 'Clarus Innovace Teknologi', 'Network Infrastructure Intern', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2023', '2024', '1755652815-1755620617-Umar-Aziz-CV.pdf', '2025-08-19 16:23:37', '2025-08-20 06:39:00'),
+(2, 'PPKD Jakarta Pusat', 'Peserta Pelatihan jurusan Web Programming', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '2025', '2025', '', '2025-08-20 01:38:10', '2025-08-20 06:39:07'),
+(3, 'SMK Negeri 7 Jakarta', 'Subtitute Teacher | Interactive Media Design', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n', '2022', '2023', '', '2025-08-20 01:43:30', '2025-08-20 06:00:59'),
+(4, 'NexFace', 'UI/UX Designer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', '2021', '2022', '', '2025-08-20 06:02:07', '2025-08-20 06:39:18');
 
 -- --------------------------------------------------------
 
@@ -474,7 +479,7 @@ ALTER TABLE `hero`
 -- AUTO_INCREMENT for table `job`
 --
 ALTER TABLE `job`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `portofolio`
