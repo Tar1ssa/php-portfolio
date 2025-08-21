@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2025 at 10:13 AM
+-- Generation Time: Aug 21, 2025 at 10:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -308,6 +308,28 @@ INSERT INTO `slider` (`id`, `title`, `description`, `image`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `specialization`
+--
+
+CREATE TABLE `specialization` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `specialization`
+--
+
+INSERT INTO `specialization` (`id`, `name`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'HTML', 'Im proficient in HTML with 2 years of experience', 1, '2025-08-21 08:07:28', '2025-08-21 08:08:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `trailers`
 --
 
@@ -424,6 +446,12 @@ ALTER TABLE `slider`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `specialization`
+--
+ALTER TABLE `specialization`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `trailers`
 --
 ALTER TABLE `trailers`
@@ -504,6 +532,12 @@ ALTER TABLE `skills`
 --
 ALTER TABLE `slider`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `specialization`
+--
+ALTER TABLE `specialization`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `trailers`

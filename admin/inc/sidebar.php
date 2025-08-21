@@ -29,15 +29,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="?page=trailers">
+                        <a class="nav-link collapsed" href="?page=trailers">
                             <i class="bi bi-circle"></i><span>Trailers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?page=job">
+                        <a class="nav-link collapsed" href="?page=job">
                             <i class="bi bi-circle"></i><span>Job</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="?page=specialization">
+                            <i class="bi bi-gear"></i>
+                            <span>Specialization</span>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link collapsed" href="?page=client">
                             <i class="bi bi-gear"></i>
@@ -45,12 +52,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="?page=blog">
+                        <a class="nav-link collapsed" href="?page=blog">
                             <i class="bi bi-circle"></i><span>Blog</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?page=portofolio">
+                        <a class="nav-link collapsed" href="?page=portofolio">
                             <i class="bi bi-circle"></i><span>Portofolio</span>
                         </a>
                     </li>

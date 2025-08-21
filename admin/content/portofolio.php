@@ -45,8 +45,8 @@ function changeis_active($isactive)
                     <div class="mb-3" align="right">
                         <a href="?page=tambah-portofolio" class="btn btn-primary">Tambah</a>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table table-bordered align-middle table-hover">
+                        <thead class="align-middle table-dark">
                             <tr>
                                 <th>No</th>
                                 <th>Image</th>
@@ -61,26 +61,26 @@ function changeis_active($isactive)
                             <?php
                             foreach ($rows as $key => $row):
                             ?>
-                            <tr>
-                                <td><?php echo $key += 1 ?></td>
-                                <td><img width="100" src="uploads/portofolio/<?php echo ($row['image']) ?>" alt="">
-                                </td>
-                                <td><?php echo $row['title'] ?></td>
-                                <td><?php echo changeis_active($row['is_active']) ?></td>
-                                <td><?php echo $row['id_category'] ?></td>
-                                <td>
-                                    <a href="?page=tambah-portofolio&edit=<?php echo $row['id'] ?>"
-                                        class="btn btn-sm btn-success">
-                                        Edit
-                                    </a>
-                                    <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                        href="?page=tambah-portofolio&delete=<?php echo $row['id'] ?>"
-                                        class="btn btn-sm btn-danger">
-                                        Delete
-                                    </a>
-                                </td>
+                                <tr>
+                                    <td><?php echo $key += 1 ?></td>
+                                    <td><img width="100" src="uploads/portofolio/<?php echo ($row['image']) ?>" alt="">
+                                    </td>
+                                    <td><?php echo $row['title'] ?></td>
+                                    <td><?php echo changeis_active($row['is_active']) ?></td>
+                                    <td><?php echo $row['id_category'] ?></td>
+                                    <td>
+                                        <a href="?page=tambah-portofolio&edit=<?php echo $row['id'] ?>"
+                                            class="btn btn-sm btn-success mx-auto">
+                                            Edit
+                                        </a>
+                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                            href="?page=tambah-portofolio&delete=<?php echo $row['id'] ?>"
+                                            class="btn btn-sm btn-danger mx-auto mt-2">
+                                            Delete
+                                        </a>
+                                    </td>
 
-                            </tr>
+                                </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>

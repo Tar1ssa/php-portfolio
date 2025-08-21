@@ -40,7 +40,7 @@ $rowcv = mysqli_fetch_assoc($querycv);
   include 'inc/css.php';
   ?>
 
-  <title></title>
+  <title>PHP Portfolio</title>
 </head>
 
 <body class="fullpage">

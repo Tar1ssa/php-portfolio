@@ -64,43 +64,46 @@ if (isset($_POST['editcv'])) {
                     <div class="mb-3" align="right">
                         <a href="?page=tambah-job" class="btn btn-primary">Tambah</a>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Company Name</th>
-                                <th>Job Title</th>
-                                <th>Description</th>
-                                <th>Duration</th>
-                                <th></th>
+                    <div class="table-responsive-sm">
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($rows as $key => $row):
-                            ?>
+                        <table class="table table-bordered align-middle table-hover">
+                            <thead class="align-middle table-dark">
                                 <tr>
-                                    <td><?php echo $key += 1 ?></td>
-                                    <td><?php echo $row['company'] ?></td>
-                                    <td><?php echo $row['job_title'] ?></td>
-                                    <td><?php echo $row['description'] ?></td>
-                                    <td><?php echo $row['start'] ?> - <?php echo $row['ended'] ?></td>
-                                    <td>
-                                        <a href="?page=tambah-job&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success">
-                                            Edit
-                                        </a>
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                            href="?page=tambah-job&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger">
-                                            Delete
-                                        </a>
-                                    </td>
+                                    <th>No</th>
+                                    <th>Company Name</th>
+                                    <th>Job Title</th>
+                                    <th>Description</th>
+                                    <th>Duration</th>
+                                    <th></th>
+
                                 </tr>
-                            <?php endforeach ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="">
+                                <?php
+                                foreach ($rows as $key => $row):
+                                ?>
+                                    <tr>
+                                        <td><?php echo $key += 1 ?></td>
+                                        <td><?php echo $row['company'] ?></td>
+                                        <td><?php echo $row['job_title'] ?></td>
+                                        <td><?php echo $row['description'] ?></td>
+                                        <td><?php echo $row['start'] ?> - <?php echo $row['ended'] ?></td>
+                                        <td>
+                                            <a href="?page=tambah-job&edit=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-success mx-auto">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-job&delete=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-danger mx-auto mt-2">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <embed src="uploads/job/<?php echo $rowcv['cv'] ?>" type="application/pdf" width="100%"
                         height="600px" />

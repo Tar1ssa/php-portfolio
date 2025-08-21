@@ -24,8 +24,8 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                     <div class="mb-3" align="right">
                         <a href="?page=tambah-trailers" class="btn btn-primary">Tambah</a>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
+                    <table class="table table-bordered align-middle table-hover">
+                        <thead class="align-middle table-dark">
                             <tr>
                                 <th>No</th>
                                 <th>Image</th>
@@ -49,12 +49,12 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     <td><?php echo $row['url'] ?></td>
                                     <td>
                                         <a href="?page=tambah-trailers&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success">
+                                            class="btn btn-sm btn-success mx-auto">
                                             Edit
                                         </a>
                                         <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
                                             href="?page=tambah-trailers&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger">
+                                            class="btn btn-sm btn-danger mx-auto mt-2">
                                             Delete
                                         </a>
                                     </td>
