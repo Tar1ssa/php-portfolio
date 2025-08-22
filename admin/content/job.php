@@ -88,16 +88,20 @@ if (isset($_POST['editcv'])) {
                                         <td><?php echo $row['job_title'] ?></td>
                                         <td><?php echo $row['description'] ?></td>
                                         <td><?php echo $row['start'] ?> - <?php echo $row['ended'] ?></td>
-                                        <td>
-                                            <a href="?page=tambah-job&edit=<?php echo $row['id'] ?>"
-                                                class="btn btn-sm btn-success mx-auto">
-                                                Edit
-                                            </a>
-                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                                href="?page=tambah-job&delete=<?php echo $row['id'] ?>"
-                                                class="btn btn-sm btn-danger mx-auto mt-2">
-                                                Delete
-                                            </a>
+                                        <td class="">
+                                            <div class="d-flex justify-content-between">
+                                                <a href="?page=tambah-job&edit=<?php echo $row['id'] ?>"
+                                                    class="btn btn-sm btn-success mx-auto">
+                                                    Edit
+                                                </a>
+
+
+                                                <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                    href="?page=tambah-job&delete=<?php echo $row['id'] ?>"
+                                                    class="btn btn-sm btn-danger mx-auto my-auto">
+                                                    Delete
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php endforeach ?>

@@ -21,6 +21,9 @@ $rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
 $queryjob = mysqli_query($koneksi, "SELECT * FROM job ORDER BY id DESC");
 $rowjob = mysqli_fetch_all($queryjob, MYSQLI_ASSOC);
 
+$queryspec = mysqli_query($koneksi, "SELECT * FROM specialization ORDER BY id DESC");
+$rowspec = mysqli_fetch_all($queryspec, MYSQLI_ASSOC);
+
 $querycv = mysqli_query($koneksi, "SELECT cv, id FROM job LIMIT 1");
 $rowcv = mysqli_fetch_assoc($querycv);
 
@@ -272,7 +275,7 @@ $rowcv = mysqli_fetch_assoc($querycv);
   <script src="assets/js/jquery-1.12.4.min.js"></script>
   <script src="assets/js/popper.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/ionicons.js"></script>
+  <!-- <script src="assets/ionicons.js"></script> -->
   <script src="assets/js/jarallax.min.js"></script>
   <script src="assets/js/jquery.ajaxchimp.min.js"></script>
   <script src="assets/js/jquery.validate.min.js"></script>

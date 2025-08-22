@@ -1,6 +1,9 @@
 <?php
 $query = mysqli_query($koneksi, "SELECT * FROM specialization ORDER BY id ASC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+$totalspec =  mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM specialization");
+$rowtotalspec = mysqli_fetch_assoc($totalspec);
 ?>
 
 <div class="pagetitle">
@@ -22,7 +25,13 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                 <div class="card-body">
                     <h5 class="card-title">Data specialization</h5>
                     <div class="mb-3" align="right">
-                        <a href="?page=tambah-specialization" class="btn btn-primary">Tambah</a>
+                        <?php
+                        if ($rowtotalspec['total'] == 3) {
+                            echo " is full";
+                        } else {
+                            echo "<a href='?page=tambah-specialization' class='btn btn-sm btn-primary' align='right'>Tambah Specialization</a>";
+                        }
+                        ?>
                     </div>
                     <table class="table table-bordered align-middle table-hover">
                         <thead class="align-middle table-dark">
@@ -45,15 +54,17 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     <td><?php echo $row['description'] ?></td>
                                     <td><?php echo $row['status'] ?></td>
                                     <td>
-                                        <a href="?page=tambah-specialization&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success mx-auto">
-                                            Edit
-                                        </a>
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                            href="?page=tambah-specialization&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger mx-auto mt-2">
-                                            Delete
-                                        </a>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="?page=tambah-specialization&edit=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-success mx-auto">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-specialization&delete=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-danger mx-auto">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

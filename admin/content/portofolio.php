@@ -69,15 +69,17 @@ function changeis_active($isactive)
                                     <td><?php echo changeis_active($row['is_active']) ?></td>
                                     <td><?php echo $row['id_category'] ?></td>
                                     <td>
-                                        <a href="?page=tambah-portofolio&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success mx-auto">
-                                            Edit
-                                        </a>
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                            href="?page=tambah-portofolio&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger mx-auto mt-2">
-                                            Delete
-                                        </a>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="?page=tambah-portofolio&edit=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-success mx-auto">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-portofolio&delete=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-danger mx-auto">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </td>
 
                                 </tr>

@@ -25,8 +25,6 @@ if (isset($_POST['simpan'])) {
                 unlink($path . $row['image']);
             }
         }
-       
-       
     }
 
     if ($row) {
@@ -77,10 +75,11 @@ if (isset($_POST['simpan'])) {
                             <label for="" class="form-label fw-bold">Caption</label>
                         </div>
                         <div class="col-sm-6 mb-2">
-                           
-                                <textarea  class="form-control" name="caption" id=""><?php echo isset($row['caption']) ? $row['caption'] : '' ?></textarea>
+
+                            <textarea class="form-control" name="caption"
+                                id=""><?php echo isset($row['caption']) ? $row['caption'] : '' ?></textarea>
                         </div>
-                        
+
                         <div class="mb-2 row">
                             <label for="" class="form-label fw-bold">Hero image</label>
                         </div>
@@ -89,7 +88,7 @@ if (isset($_POST['simpan'])) {
                             <img class="mt-2" width="100"
                                 src="uploads/<?php echo isset($row['image']) ? $row['image'] : '' ?>" alt="">
                         </div>
-                        
+
                         <div class="mb-2 row">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>

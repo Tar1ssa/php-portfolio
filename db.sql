@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2025 at 10:08 AM
+-- Generation Time: Aug 22, 2025 at 10:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -325,7 +325,9 @@ CREATE TABLE `specialization` (
 --
 
 INSERT INTO `specialization` (`id`, `name`, `description`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'HTML', 'Im proficient in HTML with 2 years of experience', 1, '2025-08-21 08:07:28', '2025-08-21 08:08:19');
+(1, 'HTML/CSS', 'Im proficient in HTML/CSS with 2 years of experience', 1, '2025-08-21 08:07:28', '2025-08-22 00:55:05'),
+(2, 'Web Design', 'Experienced in using and designing Web UI/UX with figma ', 1, '2025-08-22 00:56:13', NULL),
+(5, 'PHP ', 'Hands on experience PHP with Laravel projects ', 1, '2025-08-22 07:08:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -537,7 +539,7 @@ ALTER TABLE `slider`
 -- AUTO_INCREMENT for table `specialization`
 --
 ALTER TABLE `specialization`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `trailers`

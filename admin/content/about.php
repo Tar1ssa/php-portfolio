@@ -48,15 +48,17 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     <td><?php echo $row['content'] ?></td>
                                     <td><?php echo $row['status'] ?></td>
                                     <td>
-                                        <a href="?page=tambah-about&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success mx-auto">
-                                            Edit
-                                        </a>
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                            href="?page=tambah-about&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger mx-auto mt-2">
-                                            Delete
-                                        </a>
+                                        <div class="d-flex gap-2">
+                                            <a href="?page=tambah-about&edit=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-success mx-auto">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-about&delete=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-danger mx-auto my-auto">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

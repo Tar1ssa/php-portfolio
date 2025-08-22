@@ -46,15 +46,17 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                                     <td><?php echo $row['title'] ?></td>
                                     <td><?php echo $row['description'] ?></td>
                                     <td>
-                                        <a href="?page=tambah-slider&edit=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-success mx-auto">
-                                            Edit
-                                        </a>
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                            href="?page=tambah-slider&delete=<?php echo $row['id'] ?>"
-                                            class="btn btn-sm btn-danger mx-auto mt-2">
-                                            Delete
-                                        </a>
+                                        <div class="d-flex justify-content-between">
+                                            <a href="?page=tambah-slider&edit=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-success mx-auto">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-slider&delete=<?php echo $row['id'] ?>"
+                                                class="btn btn-sm btn-danger mx-auto my-auto">
+                                                Delete
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
