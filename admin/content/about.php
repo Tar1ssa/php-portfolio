@@ -1,6 +1,15 @@
 <?php
 $query = mysqli_query($koneksi, "SELECT * FROM about ORDER BY id ASC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+
+$queryexp = mysqli_query($koneksi, "SELECT * FROM experience ORDER BY id DESC LIMIT 1");
+$rowexp = mysqli_fetch_all($queryexp, MYSQLI_ASSOC);
+
+$queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
+$rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
+
+$totalskills =  mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM skills");
+$rowtotalskills = mysqli_fetch_assoc($totalskills);
 ?>
 
 <div class="pagetitle">
@@ -64,6 +73,59 @@ $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
                             <?php endforeach ?>
                         </tbody>
                     </table>
+
+                        <?php
+                            include 'experience.php';
+                        ?>
+                        <hr>
+                        <label for="">Skills</label>
+                        <?php
+                            if ($rowtotalskills['total'] == 4) {
+                                echo " is full";
+                            } else {
+                                echo "<a href='?page=tambah-skills' class='btn btn-sm btn-primary' align='right'>Tambah Skills</a>";
+                            }
+                        ?>
+                        
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Skill</th>
+                                    <th>Proficiency</th>
+                                    <th>
+
+
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($rowskills as $keyskills => $rowskill):
+                                ?>
+                                    <tr>
+                                        <td><?php echo $keyskills += 1 ?></td>
+                                        <td><?php echo $rowskill['skill'] ?></td>
+                                        <td><input class="form-range" type="range" min="0" max="100"
+                                                value="<?php echo $rowskill['proficient'] ?>" readonly
+                                                disabled><?php echo $rowskill['proficient'] ?>%</td>
+                                        <td>
+                                            <a href="?page=tambah-skills&edit=<?php echo $rowskill['id'] ?>"
+                                                class="btn btn-sm btn-success">
+                                                Edit
+                                            </a>
+                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
+                                                href="?page=tambah-skills&delete=<?php echo $rowskill['id'] ?>"
+                                                class="btn btn-sm btn-danger">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
+                        </table>
                 </div>
             </div>
 

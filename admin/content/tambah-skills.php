@@ -18,7 +18,7 @@ if (isset($_GET['delete'])) {
         $koneksi,
         "DELETE FROM skills WHERE id='$id'");
     if ($delete) {
-        header("location:?page=tambah-about&hapus=berhasil");
+        header("location:?page=about&hapus=berhasil");
     }
 }
 
@@ -31,12 +31,12 @@ if (isset($_POST['simpan'])) {
     if ($id) {
         $update = mysqli_query($koneksi, "UPDATE skills SET skill='$skills', proficient='$prof' WHERE id='$id'");
         if ($update) {
-            header("location:?page=tambah-about&ubah=berhasil");
+            header("location:?page=about&ubah=berhasil");
         }
     } else {
         $insert = mysqli_query($koneksi, "INSERT INTO skills (skill, proficient) VALUES('$skills', '$prof')");
         if ($insert) {
-            header("location:?page=tambah-about&tambah=berhasil");
+            header("location:?page=about&tambah=berhasil");
         }
     }
 }

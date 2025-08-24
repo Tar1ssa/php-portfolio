@@ -108,7 +108,7 @@ if (isset($_POST['simpan'])) {
                     <form action="" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label class="form-label" for="">Image</label>
-                            <img width="100" src="uploads/slider<?php echo ($id) ? $rowedit['image'] : '' ?>" alt="">
+                            <img width="100" src="uploads/slider/<?php echo $rowedit['image']?>" alt="">
                             <input type="file" name="image" id="" class="form-control" placeholder="Masukkan nama anda"
                                 value="<?php echo ($id) ? $rowedit['image'] : '' ?>">
 

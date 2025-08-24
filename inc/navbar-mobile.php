@@ -10,14 +10,12 @@
       </ul>
 
       <ul class="navbar-nav navbar-nav-mobile">
-        <li class="active"><a class="nav-link" data-menuanchor="home" href="#home">Home</a></li>
-        <li><a class="nav-link" data-menuanchor="about" href="#about">About</a></li>
-        <li><a class="nav-link" data-menuanchor="video" href="#video">Trailer</a></li>
-        <li><a class="nav-link" data-menuanchor="experience" href="#experience">Experience</a></li>
-        <li><a class="nav-link" data-menuanchor="specialization" href="#specialization">Specialization</a></li>
-        <li><a class="nav-link" data-menuanchor="projects" href="#projects">Projects</a></li>
-        <li><a class="nav-link" data-menuanchor="partners" href="#partners">Partners</a></li>
-        <li><a class="nav-link" data-menuanchor="news" href="#news">News</a></li>
+        
+        <li><a class="nav-link" data-menuanchor="home" href="?page=hero">Home</a></li>
+        <li><a class="nav-link" data-menuanchor="about" href="?page=about">About</a></li>
+        <li><a class="nav-link" data-menuanchor="experience" href="?page=experience">Experience</a></li>
+        <li><a class="nav-link" data-menuanchor="projects" href="?page=projects">Projects</a></li>
+        <li><a class="nav-link" data-menuanchor="news" href="?page=news">News</a></li>
        </ul>
        <div class="navbar-mobile-footer">
         <p>© <span id="currentYear"></span> <?php echo $rowsetting['firstname'] ?>. All Rights Reserved.</p>

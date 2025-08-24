@@ -57,15 +57,31 @@
      
             menu: '.navbar-nav',
             anchors: ['home', 'about', 'video', 'experience', 'specialization', 'projects', 'partners', 'news'],
-            afterRender: function(anchorLink, index){ 
-              NavbarColor();
-            },
-            afterLoad: function(anchorLink, index){
-                $('.pp-section .intro').removeClass('animate');
-               $('.active .intro').addClass('animate');
-                NavbarColor();
+            afterRender: function(){
+    NavbarColor();
 
-            }
+    // Detect ?page= from URL
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get('page');
+
+    if (page) {
+        $.fn.pagepiling.moveTo(page);
+    } else {
+        // Default to first section
+        $.fn.pagepiling.moveTo('home');
+    }
+}
+,
+            afterLoad: function(anchorLink, index){
+    $('.pp-section .intro').removeClass('animate');
+    $('.active .intro').addClass('animate');
+    NavbarColor();
+
+    // Update URL without reloading
+    const newUrl = window.location.pathname + '?page=' + anchorLink;
+    window.history.replaceState(null, null, newUrl);
+}
+
         });
 
         $( ".pp-scrollable .intro" ).wrapInner( "<div class='scroll-wrap'>");

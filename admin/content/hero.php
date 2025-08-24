@@ -86,7 +86,7 @@ if (isset($_POST['simpan'])) {
                         <div class="col-sm-6 mb-2">
                             <input type="file" name="image" id="">
                             <img class="mt-2" width="100"
-                                src="uploads/<?php echo isset($row['image']) ? $row['image'] : '' ?>" alt="">
+                                src="uploads/hero/<?php echo $row['image']?>" alt="">
                         </div>
 
                         <div class="mb-2 row">

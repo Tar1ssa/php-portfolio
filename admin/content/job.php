@@ -2,7 +2,7 @@
 $query = mysqli_query($koneksi, "SELECT * FROM job ORDER BY id ASC");
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
-$querycv = mysqli_query($koneksi, "SELECT cv, id FROM job LIMIT 1");
+$querycv = mysqli_query($koneksi, "SELECT * FROM cv LIMIT 1");
 $rowcv = mysqli_fetch_assoc($querycv);
 // var_dump($rowcv);
 // die;
@@ -33,7 +33,7 @@ if (isset($_POST['editcv'])) {
             die;
         }
 
-        $update_cv = mysqli_query($koneksi, "UPDATE job SET cv='$application_name' WHERE id='$id'");
+        $update_cv = mysqli_query($koneksi, "UPDATE cv SET cv='$application_name' WHERE id='$id'");
         // mengedit dengan mengubah gambar
         if ($update_cv) {
             header("location:?page=job&editcv=berhasil");

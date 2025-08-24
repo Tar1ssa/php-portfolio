@@ -41,6 +41,9 @@ if (isset($_POST['simpan'])) {
     $client_name = $_POST['client_name'];
     $project_date = $_POST['project_date'];
     $project_url = $_POST['project_url'];
+    $price = $_POST['price'];
+    $id_label =  $_POST['id_label'];
+    $label_data = $_POST['label_data'];
 
     if (!empty($_FILES['image']['name'])) { // mengecek apakah terdapat gambar
 
@@ -70,11 +73,11 @@ if (isset($_POST['simpan'])) {
         }
 
         $update_gambar = "UPDATE portofolio SET title='$title', id_category='$id_category', content='$content' , image='$image_name', is_active='$is_active'
-        , client_name='$client_name', project_date='$project_date', project_url='$project_url' WHERE id='$id'";
+        , client_name='$client_name', project_date='$project_date', project_url='$project_url', id_label='$id_label', label_data='$label_data', price='$price' WHERE id='$id'";
         // mengedit dengan mengubah gambar
     } else {
         $update_gambar = "UPDATE portofolio SET title='$title', id_category='$id_category', content='$content', is_active='$is_active'
-        , client_name='$client_name', project_date='$project_date', project_url='$project_url' WHERE id='$id'";
+        , client_name='$client_name', project_date='$project_date', project_url='$project_url', id_label='$id_label', label_data='$label_data', price='$price' WHERE id='$id'";
         // mengedit tanpa mengubah gambar
     }
 
@@ -86,8 +89,8 @@ if (isset($_POST['simpan'])) {
             header("location:?page=portofolio&ubah=berhasil");
         }
     } else {
-        $insert = mysqli_query($koneksi, "INSERT INTO portofolio (title, id_category, content, image, is_active, client_name, project_date, project_url) 
-        VALUES('$title', '$id_category', '$content', '$image_name', '$is_active', '$client_name', '$project_date', '$project_url')");
+        $insert = mysqli_query($koneksi, "INSERT INTO portofolio (title, id_category, content, image, is_active, client_name, project_date, project_url, id_label, label_data, price) 
+        VALUES('$title', '$id_category', '$content', '$image_name', '$is_active', '$client_name', '$project_date', '$project_url','$id_label', '$label_data', '$price')");
         if ($insert) {
             header("location:?page=portofolio&tambah=berhasil");
         }
@@ -99,6 +102,9 @@ if (isset($_POST['simpan'])) {
 
 $querycategories = mysqli_query($koneksi, "SELECT * FROM categories WHERE type = 'portofolio' ORDER BY id DESC");
 $rowcategories = mysqli_fetch_all($querycategories, MYSQLI_ASSOC);
+
+$querylabel = mysqli_query($koneksi, "SELECT * FROM port_label ORDER BY id DESC");
+$rowlabel = mysqli_fetch_all($querylabel, MYSQLI_ASSOC);
 
 ?>
 
@@ -137,7 +143,7 @@ $rowcategories = mysqli_fetch_all($querycategories, MYSQLI_ASSOC);
                                 <!-- <option value="" disabled selected>Select Category</option> -->
                                 <?php
                                 foreach ($rowcategories as $keycategories) { ?>
-                                    <option value="<?php echo $keycategories['id'] ?>"><?php echo $keycategories['name'] ?>
+                                    <option value="<?php echo $keycategories['name']?>" <?php echo ($keycategories['name'] == $rowedit['id_category']) ? 'selected' : '' ?>><?php echo $keycategories['name'] ?>
                                     </option>
                                 <?php
                                 }
@@ -168,6 +174,34 @@ $rowcategories = mysqli_fetch_all($querycategories, MYSQLI_ASSOC);
                                 <label for="" class="form-label">Project URL</label>
                                 <input type="url" id="" name="project_url" class="form-control"
                                     value="<?php echo ($id) ? $rowedit['project_url'] : '' ?>" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="input-price" class="form-label">Price</label>
+                                <br>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="input-price">idr</span>
+                                <input type="number" id="input-price" name="price" step="5000.0" min="0" class="form-control"
+                                    value="<?php echo ($id) ? $rowedit['price'] : '' ?>" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Label</label>
+                            <select name="id_label" id="" class="form-control">
+                                <!-- <option value="" disabled selected>Select Category</option> -->
+                                <?php
+                                foreach ($rowlabel as $keylabel) { ?>
+                                    <option value="<?php echo $keylabel['label'] ?>" <?php echo ($keylabel['label'] == $rowedit['id_label']) ? 'selected' : '' ?>><?php echo $keylabel['label'] ?>
+                                    </option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            
+                            <div class="mb-3">
+                                <input type="text" id="" name="label_data" class="form-control"
+                                    value="<?php echo ($id) ? $rowedit['label_data'] : '' ?>" />
                             </div>
 
                         </div>

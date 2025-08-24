@@ -1,31 +1,6 @@
 ﻿<?php
 include 'admin/koneksi.php';
-$querysetting = mysqli_query($koneksi, "SELECT * FROM settings LIMIT 1");
-$rowsetting = mysqli_fetch_assoc($querysetting);
-
-$queryhero = mysqli_query($koneksi, "SELECT * FROM hero LIMIT 1");
-$rowhero = mysqli_fetch_assoc($queryhero);
-
-$queryabout = mysqli_query($koneksi, "SELECT * FROM about WHERE status= 1 ORDER BY id DESC");
-$rowabout = mysqli_fetch_assoc($queryabout);
-
-$queryexp = mysqli_query($koneksi, "SELECT * FROM experience WHERE id=1");
-$rowexp = mysqli_fetch_assoc($queryexp);
-
-$querytrailers = mysqli_query($koneksi, "SELECT * FROM trailers WHERE status = 1");
-$rowtrailers = mysqli_fetch_assoc($querytrailers);
-
-$queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
-$rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
-
-$queryjob = mysqli_query($koneksi, "SELECT * FROM job ORDER BY id DESC");
-$rowjob = mysqli_fetch_all($queryjob, MYSQLI_ASSOC);
-
-$queryspec = mysqli_query($koneksi, "SELECT * FROM specialization ORDER BY id DESC");
-$rowspec = mysqli_fetch_all($queryspec, MYSQLI_ASSOC);
-
-$querycv = mysqli_query($koneksi, "SELECT cv, id FROM job LIMIT 1");
-$rowcv = mysqli_fetch_assoc($querycv);
+include 'inc/query.php';
 
 ?>
 
@@ -75,34 +50,36 @@ $rowcv = mysqli_fetch_assoc($querycv);
         include "content/notfound.php";
       }
     } else {
-      // include 'content/index.php';
+      include 'content/hero.php';
     }
     ?>
+    </div>
     <!-- Masthead/hero -->
-    <?php include 'content/hero.php'; ?>
+
+  
 
     <!-- About -->
-    <?php include 'content/about.php'; ?>
+ 
 
     <!-- Video -->
-    <?php include 'content/trailers.php'; ?>
+
 
     <!-- Experience -->
-    <?php include 'content/experience.php'; ?>
+  
 
     <!-- Services -->
-    <?php include 'content/services.php'; ?>
+
 
     <!-- Projects -->
-    <?php include 'content/projects.php'; ?>
+  
 
     <!-- Partners -->
-    <?php include 'content/partners.php'; ?>
+
 
     <!-- News -->
-    <?php include 'content/news.php'; ?>
 
-  </div>
+
+
 
   <!-- Modal -->
   <div class="modal fade" id="send-request">
@@ -138,112 +115,7 @@ $rowcv = mysqli_fetch_assoc($querycv);
   </div>
 
   <!-- Project Modal Dialog 1 -->
-  <div id="project1" class="container mfp-hide zoom-anim-dialog">
-    <h2 class="mt-0">Neuro</h2>
-    <div class="mt-5 pt-2 text-dark">
-      <div class="row">
-        <div class="mb-5 col-md-6 col-lg-3">
-          <h6 class="my-0">Clients:</h6>
-          <span>Ethan Hunt, John Doe</span>
-        </div>
-        <div class="mb-5 col-md-6 col-lg-3">
-          <h6 class="my-0">Completion:</h6>
-          <span>February 5th, 2020</span>
-        </div>
-        <div class="mb-5 col-md-6 col-lg-3">
-          <h6 class="my-0">Project Type:</h6>
-          <span>Illustration</span>
-        </div>
-        <div class="mb-5 col-md-6 col-lg-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <h6 class="my-0">Budget:</h6>
-          <span>$12000</span>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-    </div>
-    <img alt="" class="mt-5 pt-2 w-100" src="assets/img/portfolio/1140x641-1.jpg">
-  </div>
-
-  <!-- Project Modal Dialog 2 -->
-  <div id="project2" class="container mfp-hide zoom-anim-dialog">
-    <h2 class="mt-0">Neuro</h2>
-    <div class="mt-5 pt-2 text-dark">
-      <div class="row">
-        <div class="col-md-3">
-          <h6 class="my-0">Clients:</h6>
-          <span>Ethan Hunt, John Doe</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Completion:</h6>
-          <span>February 5th, 2020</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Project Type:</h6>
-          <span>Illustration</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-      <div class="mt-5 row">
-        <div class="col-md-3">
-          <h6 class="my-0">Budget:</h6>
-          <span>$12000</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-    </div>
-    <img alt="" class="mt-5 pt-2 w-100" src="assets/img/portfolio/1140x641-2.jpg">
-  </div>
-
-  <!-- Project Modal Dialog 3 -->
-  <div id="project3" class="container mfp-hide zoom-anim-dialog">
-    <h2 class="mt-0">Neuro</h2>
-    <div class="mt-5 pt-2 text-dark">
-      <div class="row">
-        <div class="col-md-3">
-          <h6 class="my-0">Clients:</h6>
-          <span>Ethan Hunt, John Doe</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Completion:</h6>
-          <span>February 5th, 2020</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Project Type:</h6>
-          <span>Illustration</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-      <div class="mt-5 row">
-        <div class="col-md-3">
-          <h6 class="my-0">Budget:</h6>
-          <span>$12000</span>
-        </div>
-        <div class="col-md-3">
-          <h6 class="my-0">Authors</h6>
-          <span>Logan Cee, Paul</span>
-        </div>
-      </div>
-    </div>
-    <img alt="" class="mt-5 pt-2 w-100" src="assets/img/portfolio/1140x641-3.jpg">
-  </div>
+  <?php include 'content/projects-modal.php'; ?>
 
   <!-- Optional JavaScript -->
   <script>

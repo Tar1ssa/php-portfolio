@@ -153,11 +153,13 @@ $rowcategories = mysqli_fetch_all($querycategories, MYSQLI_ASSOC);
                             <textarea name="content" id="editor" class="form-control"><?php echo ($id) ? $rowedit['content'] : '' ?>
                             </textarea>
                         </div>
-
+                            
+                    
                         <div class="mb-3">
                             <label for="" class="form-label">Tags</label>
                             <input type="text" id="tags" name="tags" />
                         </div>
+                        <small>Bila kosong maka tulis 'kosong'</small>
 
                     </div>
                 </div>

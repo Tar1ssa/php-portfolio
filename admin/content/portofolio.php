@@ -2,10 +2,12 @@
 
 
 $query = mysqli_query($koneksi, "SELECT categories.name, portofolio.* FROM portofolio
- JOIN categories ON categories.id = portofolio.id_category
+ JOIN categories ON categories.name = portofolio.id_category
  ORDER BY portofolio.id DESC");
 
 $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
+// var_dump($rows);
+// die;
 
 
 
@@ -67,7 +69,7 @@ function changeis_active($isactive)
                                     </td>
                                     <td><?php echo $row['title'] ?></td>
                                     <td><?php echo changeis_active($row['is_active']) ?></td>
-                                    <td><?php echo $row['id_category'] ?></td>
+                                    <td><?php echo $row['name'] ?></td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="?page=tambah-portofolio&edit=<?php echo $row['id'] ?>"

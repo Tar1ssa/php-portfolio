@@ -3,11 +3,8 @@ $id = isset($_GET['edit']) ? $_GET['edit'] : '';
 
 
 
-$queryskills = mysqli_query($koneksi, "SELECT * FROM skills ORDER BY id DESC");
-$rowskills = mysqli_fetch_all($queryskills, MYSQLI_ASSOC);
 
-$totalskills =  mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM skills");
-$rowtotalskills = mysqli_fetch_assoc($totalskills);
+
 
 $queryexp = mysqli_query($koneksi, "SELECT * FROM experience ORDER BY id DESC LIMIT 1");
 $rowexp = mysqli_fetch_all($queryexp, MYSQLI_ASSOC);
@@ -16,8 +13,8 @@ if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
     $query = mysqli_query($koneksi, "SELECT * FROM about WHERE id = '$id'");
     $rowedit = mysqli_fetch_assoc($query);
-    $queryeditexp = mysqli_query($koneksi, "SELECT * FROM experience WHERE id = '$id'");
-    $roweditexp = mysqli_fetch_assoc($queryeditexp);
+    // $queryeditexp = mysqli_query($koneksi, "SELECT * FROM experience WHERE id = '$id'");
+    // $roweditexp = mysqli_fetch_assoc($queryeditexp);
     $judul = "Edit about";
 } else {
     $judul = "Add about";
@@ -46,8 +43,8 @@ if (isset($_POST['simpan'])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
     $time = $_POST['time'];
-    $how_long = $_POST['how_long'];
-    $status = $_POST['status'];
+    // $how_long = $_POST['how_long'];
+    // $status = $_POST['status'];
     if (!empty($_FILES['image']['name'])) {
         $image = $_FILES['image']['name'];
         $tmp_name = $_FILES['image']['tmp_name'];
@@ -83,13 +80,13 @@ if (isset($_POST['simpan'])) {
 
     if ($id) {
         $update = mysqli_query($koneksi, "$update_gambar");
-        $updateexp = mysqli_query($koneksi, "UPDATE experience SET how_long='$how_long', time='$time'");
+        // $updateexp = mysqli_query($koneksi, "UPDATE experience SET how_long='$how_long', time='$time'");
         if ($update) {
             header("location:?page=about&ubah=berhasil");
         }
     } else {
         $insert = mysqli_query($koneksi, "INSERT INTO about (title, content, image, status) VALUES('$title', '$content', '$image_name', '$status')");
-        $insertexp = mysqli_query($koneksi, "INSERT INTO experience (how_long, time) VALUES ('$how_long', '$time')");
+        // $insertexp = mysqli_query($koneksi, "INSERT INTO experience (how_long, time) VALUES ('$how_long', '$time')");
         if ($insert) {
             header("location:?page=about&tambah=berhasil");
         }
@@ -136,63 +133,7 @@ if (isset($_POST['simpan'])) {
 
                         </div>
                         <hr>
-                        <?php
-                        
 
-                                include 'experience.php';
-            
-                            
-                            
-                        ?>
-                        <hr>
-                        <label for="">Skills</label>
-                        <?php
-                            if ($rowtotalskills['total'] == 4) {
-                                echo " is full";
-                            } else {
-                                echo "<a href='?page=tambah-skills' class='btn btn-sm btn-primary' align='right'>Tambah Skills</a>";
-                            }
-                        ?>
-                        
-                        <table class="table table-bordered mt-3">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Skill</th>
-                                    <th>Proficiency</th>
-                                    <th>
-
-
-
-                                    </th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                foreach ($rowskills as $keyskills => $rowskill):
-                                ?>
-                                    <tr>
-                                        <td><?php echo $keyskills += 1 ?></td>
-                                        <td><?php echo $rowskill['skill'] ?></td>
-                                        <td><input class="form-range" type="range" min="0" max="100"
-                                                value="<?php echo $rowskill['proficient'] ?>" readonly
-                                                disabled><?php echo $rowskill['proficient'] ?>%</td>
-                                        <td>
-                                            <a href="?page=tambah-skills&edit=<?php echo $rowskill['id'] ?>"
-                                                class="btn btn-sm btn-success">
-                                                Edit
-                                            </a>
-                                            <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')"
-                                                href="?page=tambah-skills&delete=<?php echo $rowskill['id'] ?>"
-                                                class="btn btn-sm btn-danger">
-                                                Delete
-                                            </a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
 
                         <div class="mb-3">
                             <label for="">Status</label>

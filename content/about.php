@@ -1,4 +1,5 @@
-<section id="about" class="section pp-scrollable d-flex align-items-center position-absolute">
+
+<section id="home" class="pp-section pp-scrollable d-flex align-items-center section position-absolute d-block" role="main">
         <div class="intro">
 
             <div class="container">
@@ -21,10 +22,27 @@
                   </div>
                   <?php } ?>
                   
-                 
                 </div>
               </div>
 
+          </div>
+        </div>
+      </section>
+
+
+<!-- trailers -->
+
+
+<section id="video" class="pp-section navbar-is-white section pp-scrollable d-flex align-items-center position-absolute" style="background-image:url('admin/uploads/trailers/<?php echo $rowtrailers ['image'] ?>');">
+        <div class="intro">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-6 col-lg-5">
+                <h2 class="h1 text-white"><span class="text-primary">Watch</span><br>Video.</h2>
+                <p class="lead mt-4 mb-5 text-white"><?php echo $rowtrailers ['caption'] ?></p>
+                <a href="<?php echo $rowtrailers ['url'] ?>" class="popup-youtube icon-video-play"></a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
