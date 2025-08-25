@@ -1,4 +1,3 @@
-
 <section id="home" class="pp-section section pp-scrollable d-flex align-items-center position-absolute">
   <div class="intro">
     <div class="container">

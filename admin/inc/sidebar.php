@@ -89,6 +89,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="?page=messages">
+                    <i class="bi bi-gear"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+
 
 
         </ul>

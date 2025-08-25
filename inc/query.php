@@ -45,4 +45,15 @@ $rowpage = mysqli_fetch_all($querypage, MYSQLI_ASSOC);
 
 // var_dump($rowpage);
 //                 die;
-?>
+
+
+if (isset($_POST['simpan'])) {
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $text = $_POST['text'];
+
+  $insert = mysqli_query($koneksi, "INSERT INTO message (name, email, text) VALUES('$name', '$email', '$text')");
+  if ($insert) {
+    header("location:?page=hero&tambah=berhasil");
+  }
+}

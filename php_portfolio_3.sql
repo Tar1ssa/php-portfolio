@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2025 at 01:26 AM
+-- Generation Time: Aug 25, 2025 at 04:42 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -191,7 +191,7 @@ CREATE TABLE `hero` (
 --
 
 INSERT INTO `hero` (`id`, `caption`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Crafting digital experiences with precision, passion, and purpose.', '1755531469-5s5HSFk.png', '2025-08-18 15:05:12', '2025-08-18 15:37:49');
+(1, 'Crafting digital experiences with precision, passion, and purpose.', '1756088297-1755048349-wallhaven-9d3181.jpg', '2025-08-18 15:05:12', '2025-08-25 02:18:17');
 
 -- --------------------------------------------------------
 
@@ -219,6 +219,28 @@ INSERT INTO `job` (`id`, `company`, `job_title`, `description`, `start`, `ended`
 (2, 'PPKD Jakarta Pusat', 'Peserta Pelatihan jurusan Web Programming', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '2025', '2025', '2025-08-20 01:38:10', '2025-08-20 06:39:07'),
 (3, 'SMK Negeri 7 Jakarta', 'Subtitute Teacher | Interactive Media Design', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n', '2022', '2023', '2025-08-20 01:43:30', '2025-08-20 06:00:59'),
 (4, 'NexFace', 'UI/UX Designer', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam', '2021', '2022', '2025-08-20 06:02:07', '2025-08-20 06:39:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `email`, `name`, `text`, `created_at`, `updated_at`) VALUES
+(1, 'ucup123@gmail.com', 'ucup stuerd', '22', '2025-08-25 02:32:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -502,6 +524,12 @@ ALTER TABLE `job`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `page`
 --
 ALTER TABLE `page`
@@ -606,6 +634,12 @@ ALTER TABLE `hero`
 --
 ALTER TABLE `job`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `page`
